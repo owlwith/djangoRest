@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from student.api import StudentList
+from rest_framework.authtoken import views
+from student.api import StudentList, StudentDetail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/student_list', StudentList.as_view(), name='student_list')
+    path('api/student_list', StudentList.as_view(), name='student_list'),
+    path('api/student_list/<int:student_id>', StudentDetail.as_view(), name='student_detail'),
+    path('api/auth', views.obtain_auth_token, name='user_auth-create'),
 ]
